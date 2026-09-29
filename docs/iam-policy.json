@@ -1,0 +1,125 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadTheContactCenter",
+      "Effect": "Allow",
+      "Action": [
+        "connect:ListInstances",
+        "connect:DescribeInstance",
+        "connect:ListContactFlows",
+        "connect:DescribeContactFlow",
+        "connect:ListContactFlowModules",
+        "connect:SearchContactFlows",
+        "connect:ListHoursOfOperations",
+        "connect:DescribeHoursOfOperation",
+        "connect:SearchHoursOfOperations",
+        "connect:ListQueues",
+        "connect:DescribeQueue",
+        "connect:SearchQueues",
+        "connect:ListRoutingProfiles",
+        "connect:DescribeRoutingProfile",
+        "connect:ListRoutingProfileQueues",
+        "connect:SearchRoutingProfiles",
+        "connect:ListPhoneNumbersV2",
+        "connect:ListPhoneNumbers",
+        "connect:DescribePhoneNumber",
+        "connect:ListFlowAssociations",
+        "connect:ListPrompts",
+        "connect:DescribePrompt",
+        "connect:ListUsers",
+        "connect:DescribeUser",
+        "connect:SearchUsers",
+        "connect-campaigns:ListCampaigns",
+        "connect-campaigns:DescribeCampaign",
+        "connect-campaigns:GetCampaignState",
+        "connect-campaigns:GetConnectInstanceConfig"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "BuildHoursQueuesRoutingProfilesFlows",
+      "Effect": "Allow",
+      "Action": [
+        "connect:CreateHoursOfOperation",
+        "connect:CreateQueue",
+        "connect:CreateRoutingProfile",
+        "connect:CreateContactFlow",
+        "connect:UpdateContactFlowContent",
+        "connect:TagResource"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "NativeTestingAndSimulation",
+      "Effect": "Allow",
+      "Action": [
+        "connect:CreateTestCase",
+        "connect:DescribeTestCase",
+        "connect:SearchTestCases",
+        "connect:StartTestCaseExecution",
+        "connect:GetTestCaseExecutionSummary",
+        "connect:ListTestCaseExecutionRecords",
+        "connect:ListTestCaseExecutions"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "NeverDeleteAnything",
+      "Effect": "Deny",
+      "Action": [
+        "connect:Delete*",
+        "connect:Disassociate*",
+        "connect-campaigns:Delete*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "NeverGoLiveAHumanPressesGo",
+      "Effect": "Deny",
+      "Action": [
+        "connect:AssociatePhoneNumberContactFlow",
+        "connect:AssociateFlow",
+        "connect:UpdatePhoneNumber",
+        "connect:UpdatePhoneNumberMetadata",
+        "connect:ClaimPhoneNumber",
+        "connect:ReleasePhoneNumber",
+        "connect:ImportPhoneNumber"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "NeverDialOrMessage",
+      "Effect": "Deny",
+      "Action": [
+        "connect:StartOutboundVoiceContact",
+        "connect:StartOutboundChatContact",
+        "connect:StartOutboundEmailContact",
+        "connect:StartChatContact",
+        "connect:StartTaskContact",
+        "connect:StartWebRTCContact",
+        "connect:StartEmailContact",
+        "connect:TransferContact",
+        "connect:StopContact",
+        "connect-campaigns:Start*",
+        "connect-campaigns:Resume*",
+        "connect-campaigns:PutOutboundRequestBatch",
+        "connect-campaigns:PutProfileOutboundRequestBatch"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "NoIdentityOrSecurityProfileWrites",
+      "Effect": "Deny",
+      "Action": [
+        "connect:CreateUser",
+        "connect:UpdateUser*",
+        "connect:CreateSecurityProfile",
+        "connect:UpdateSecurityProfile",
+        "connect:AssociateSecurityProfiles",
+        "iam:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
